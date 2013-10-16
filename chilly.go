@@ -4,14 +4,14 @@ import "fmt"
 
 func main() {
   var therm = HallwayThermometer{}
-  ControlTemp(therm)
+  var tempController = ResidentialTempController{} 
+  ControlTemp(therm, tempController)
 }
 
-func ControlTemp(therm Thermometer) {
+func ControlTemp(therm Thermometer, tempController TempController) {
   var t = therm.GetTemp()
   fmt.Println("Current tempature: ", t)
 
-  var tempController = ResidentialTempController{}
   switch {
   case t > 70:
     tempController.Cool()
@@ -33,7 +33,7 @@ func (h HallwayThermometer) GetTemp() int {
 }
 
 /*   Temp controller */
-type TempContoller interface {
+type TempController interface {
   Cool()
   Heat()
 }
