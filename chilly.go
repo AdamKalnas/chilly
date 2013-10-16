@@ -4,6 +4,10 @@ import "fmt"
 
 func main() {
   var therm = HallwayThermometer{}
+  ControlTemp(therm)
+}
+
+func ControlTemp(therm Thermometer) {
   var t = therm.GetTemp()
   fmt.Println("Current tempature: ", t)
 
