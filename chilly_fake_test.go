@@ -12,6 +12,18 @@ func TestTurnOnHeating(t *testing.T) {
   }
 }
 
+func TestTurnOnCooling(t *testing.T) {
+  var therm = FakeThermometer{}
+  var tempController = FakeTempController{}
+  therm.mode = "its_hot"
+  ControlTemp(therm, &tempController)
+  if (tempController.AcIsOn != true) {
+	t.Errorf("The AC should be on")
+  }
+}
+
+
+
 /* Fake Thermometor */
 type FakeThermometer struct {
   mode string
@@ -32,8 +44,8 @@ type FakeTempController struct {
 	AcIsOn bool
 }
 
-func (t FakeTempController) Cool() {
-	t.AcIsOn = true
+func (t* FakeTempController) Cool() {
+  t.AcIsOn = true
 }
 
 func (t* FakeTempController) Heat() {
